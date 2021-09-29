@@ -16,7 +16,7 @@ server.get('/', logger, (req, res) => {
   `);
 });
 
-server.use('*', (req, res, next) => {
+server.use('*', (req, res, next) => { // eslint-disable-line
   // catch all 404 errors middleware
   res.status(404).json({ message: `${req.method} ${req.originalUrl} not found!` })
 });
@@ -25,6 +25,7 @@ server.use(errorHandling) // will trap errors happening above
 
 module.exports = server;
 
+// these belongs in a different module
 function logger(req, res, next) { // middleware
   console.log(`it is a ${req.method} request to ${req.originalUrl}`)
   next() // next without args, sends req and res along the pipe
