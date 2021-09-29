@@ -6,10 +6,10 @@ async function checkHubId (req, res, next) {
   try {
     const hubMaybe = await Hub.findById(req.params.id)
     if (hubMaybe) {
-      
+      req.hub = hubMaybe
       next()
     } else {
-
+      
     }
   } catch (error) {
     next(error)
