@@ -17,7 +17,13 @@ async function checkHubId(req, res, next) {
   }
 }
 
+const hubSchema = yup.object().shape({
+  
+})
 
+function validateHub(req, res, next) {
+
+}
 
 // function validateHub(req, res, next) {
 //   // if req.body legit next()
