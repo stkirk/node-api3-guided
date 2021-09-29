@@ -22,13 +22,14 @@ router.get('/:id', checkHubId, (req, res) => {
 
 router.post('/', (req, res, next) => {
   if (!req.body.name) {
-    next
+    next({ status: 400, message: 'name required!!'})
+  } else {
+    Hubs.add(req.body)
+      .then(hub => {
+        res.status(201).json(hub);
+      })
+      .catch(next);
   }
-  Hubs.add(req.body)
-    .then(hub => {
-      res.status(201).json(hub);
-    })
-    .catch(next);
 });
 
 router.delete('/:id', checkHubId, (req, res, next) => {
