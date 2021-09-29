@@ -20,7 +20,7 @@ function validateHub(req, res, next) {
   // if req.body legit next()
   // if req.body sucks next({ body sucks })
   const { name } = req.body
-  if (!name || typoef name !== 'string' || !name.trim()) {
+  if (!name || typeof name !== 'string' || !name.trim()) {
     next({ code: 400, message: 'name required' })
   } else {
     next()
