@@ -26,4 +26,8 @@ function logger(req, res, next) { // middleware
   console.log(`it is a ${req.method} request to ${req.originalUrl}`)
   next() // next without args, sends req and res along the pipe
 }
-function errorHandling(err)
+function errorHandling(err, req, res, next) {
+  res.status(err.status || 500).json({
+    message: err.message,
+  })
+}
