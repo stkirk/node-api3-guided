@@ -20,7 +20,8 @@ function validateHub(req, res, next) {
   // if req.body legit next()
   // if req.body sucks next({ body sucks })
   try {
-    if (req.body.name && req.body.name.trim()) {
+    const { name } = req.body
+    if (name && name.trim()) {
       next()
     } else {
       next({ status: 422, message: `No body!` })
