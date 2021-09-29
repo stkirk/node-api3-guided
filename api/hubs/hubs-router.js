@@ -11,11 +11,12 @@ router.get('/', (req, res, next) => {
       res.status(200).json(hubs);
     })
     .catch(error => {
+      // unnecessary function wrapping
       next(error);
     });
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res, next) => {
   Hubs.findById(req.params.id)
     .then(hub => {
       if (hub) {
