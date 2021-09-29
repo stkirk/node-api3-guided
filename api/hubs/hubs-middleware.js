@@ -33,6 +33,8 @@ async function validateHub(req, res, next) {
       req.body,
       { strict: false, stripUnknown: true }
     )
+    req.body = validated
+    next()
   } catch (err) {
     next({ status: 422, message: err.message })
   }

@@ -36,7 +36,7 @@ router.delete('/:id', checkHubId, (req, res, next) => {
     .catch(next);
 });
 
-router.put('/:id', checkHubId, (req, res, next) => {
+router.put('/:id', checkHubId, validateHub, (req, res, next) => {
   Hubs.update(req.params.id, req.body)
     .then(hub => {
       res.status(200).json(hub);
