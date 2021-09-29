@@ -8,7 +8,7 @@ server.use(express.json());
 // server.use(logger); // globally, affects all routers and endpoints that come after
 server.use('/api/hubs', logger, hubsRouter);
 
-server.get('/', (req, res) => {
+server.get('/', logger, (req, res) => {
   res.send(`
     <h2>Lambda Hubs API</h2>
     <p>Welcome to the Lambda Hubs API</p>
