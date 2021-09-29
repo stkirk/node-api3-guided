@@ -21,7 +21,7 @@ const hubSchema = yup.object().shape({
   name: yup
     .string()
     .typeError('name must be a string')
-    .trim('only whitespace bad')
+    .trim()
     .required('name is required')
     .min(3, 'name must be 3 chars long')
     .max(10, 'name should be 10 chars tops')
