@@ -19,15 +19,11 @@ async function checkHubId(req, res, next) {
 function validateHub(req, res, next) {
   // if req.body legit next()
   // if req.body sucks next({ body sucks })
-  try {
-    const { name } = req.body
-    if (name && name.trim()) {
-      next()
-    } else {
-      next({ status: 422, message: `name required!!` })
-    }
-  } catch (err) {
-    next(err)
+  const { name } = req.body
+  if (!name || typoef name !== 'string' || !name.trim()) {
+    next({ code: 400, message: 'name required' })
+  } else {
+    next()
   }
 }
 
