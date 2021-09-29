@@ -5,17 +5,13 @@ const Messages = require('../messages/messages-model.js');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   Hubs.find(req.query)
     .then(hubs => {
       res.status(200).json(hubs);
     })
     .catch(error => {
-      // log error to server
-      console.log(error);
-      res.status(500).json({
-        message: 'Error retrieving the hubs',
-      });
+      next(error);
     });
 });
 
@@ -28,13 +24,7 @@ router.get('/:id', (req, res) => {
         res.status(404).json({ message: 'Hub not found' });
       }
     })
-    .catch(error => {
-      // log error to server
-      console.log(error);
-      res.status(500).json({
-        message: 'Error retrieving the hub',
-      });
-    });
+    .catch(next);
 });
 
 router.post('/', (req, res) => {
