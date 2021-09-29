@@ -1,5 +1,5 @@
 const express = require('express');
-const { checkHubId } = require('./hubs-middleware')
+const { checkHubId, validateHub } = require('./hubs-middleware')
 const Hubs = require('./hubs-model.js');
 const Messages = require('../messages/messages-model.js');
 
@@ -20,16 +20,12 @@ router.get('/:id', checkHubId, (req, res) => {
   res.status(200).json(req.hub)
 });
 
-router.post('/', (req, res, next) => {
-  if (!req.body.name) {
-    next({ status: 400, message: 'name required!!'})
-  } else {
-    Hubs.add(req.body)
-      .then(hub => {
-        res.status(201).json(hub);
-      })
-      .catch(next);
-  }
+router.post('/', validateHub, (req, res, next) => {
+  Hubs.add(req.body)
+  .then(hub => {
+    res.status(201).json(hub);
+  })
+  .catch(next);
 });
 
 router.delete('/:id', checkHubId, (req, res, next) => {
