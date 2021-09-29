@@ -19,8 +19,9 @@ async function checkHubId(req, res, next) {
 
 const hubSchema = yup.object().shape({
   name: yup
-  .string()
+    .string()
     .typeError('name must be a string')
+    .trim('')
 })
 
 function validateHub(req, res, next) {
