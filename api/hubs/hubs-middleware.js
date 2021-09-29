@@ -28,7 +28,11 @@ const hubSchema = yup.object().shape({
 })
 
 function validateHub(req, res, next) {
+  try {
 
+  } catch (err) {
+    next({ status: 422, })
+  }
 }
 
 // function validateHub(req, res, next) {
