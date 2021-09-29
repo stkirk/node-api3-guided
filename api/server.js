@@ -20,13 +20,16 @@ server.use('*', (req, res, next) => {
   res.status(404).json({ message: `${req.method} ${req.originalUrl} not found!` })
 });
 
+server.use(errorHandling)
+
 module.exports = server;
 
 function logger(req, res, next) { // middleware
   console.log(`it is a ${req.method} request to ${req.originalUrl}`)
   next() // next without args, sends req and res along the pipe
 }
-function errorHandling(err, req, res, next) {
+function errorHandling(err, req, res, next) { // error handling
+  // connect this with server.use
   res.status(err.status || 500).json({
     message: err.message,
   })
