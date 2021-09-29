@@ -24,7 +24,7 @@ function validateHub(req, res, next) {
     if (name && name.trim()) {
       next()
     } else {
-      next({ status: 422, message: `No body!` })
+      next({ status: 422, message: `name required!!` })
     }
   } catch (err) {
     next(err)
