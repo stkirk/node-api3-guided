@@ -20,7 +20,7 @@ server.use('*', (req, res, next) => {
   res.status(404).json({ message: `${req.method} ${req.originalUrl} not found!` })
 });
 
-server.use(errorHandling)
+server.use(errorHandling) // will trap errors happening above
 
 module.exports = server;
 
@@ -29,7 +29,7 @@ function logger(req, res, next) { // middleware
   next() // next without args, sends req and res along the pipe
 }
 function errorHandling(err, req, res, next) { // error handling
-  // connect this with server.use
+  // connect this with server.use at the end of the pipeline
   res.status(err.status || 500).json({
     message: err.message,
   })
