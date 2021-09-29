@@ -16,9 +16,9 @@ server.get('/', logger, (req, res) => {
   `);
 });
 
-server.use('*', (req, res, next) => { // eslint-disable-line
+server.use('*', (req, res, next) => {
   // catch all 404 errors middleware
-  res.status(404).json({ message: `${req.method} ${req.originalUrl} not found!` })
+  next({ message: `${req.method} ${req.originalUrl} not found!` })
 });
 
 server.use(errorHandling) // will trap errors happening above
