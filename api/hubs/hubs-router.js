@@ -21,6 +21,9 @@ router.get('/:id', checkHubId, (req, res) => {
 });
 
 router.post('/', (req, res, next) => {
+  if (!req.body.name) {
+    next
+  }
   Hubs.add(req.body)
     .then(hub => {
       res.status(201).json(hub);
