@@ -1,6 +1,6 @@
 const Hub = require('./hubs-model')
 
-async function checkHubId (req, res, next) {
+async function checkHubId(req, res, next) {
   // if id legit, next()
   // if id bad, next({ not found!!! })
   try {
@@ -19,6 +19,15 @@ async function checkHubId (req, res, next) {
 function validateHub(req, res, next) {
   // if req.body legit next()
   // if req.body sucks next({ body sucks })
+  try {
+    if (req.body) {
+      next()
+    } else {
+      next({ status: 404, message: `No body!` })
+    }
+  } catch (err) {
+    next(err)
+  }
 }
 
 module.exports = {
