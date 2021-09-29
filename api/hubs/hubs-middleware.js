@@ -9,9 +9,13 @@ async function checkHubId (req, res, next) {
       req.hub = hubMaybe
       next()
     } else {
-      
+      next({ status: 404, message: 'not found!!!' })
     }
   } catch (error) {
     next(error)
   }
+}
+
+module.exports = {
+  
 }
