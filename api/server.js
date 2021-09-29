@@ -23,6 +23,6 @@ server.use('*', (req, res, next) => {
 module.exports = server;
 
 function logger(req, res, next) {
-  console.log(`it is a ${req.method} request to ${req.path}`)
+  console.log(`it is a ${req.method} request to ${req.originalUrl}`)
   next() // next without args, sends req and res along the pipe
 }
