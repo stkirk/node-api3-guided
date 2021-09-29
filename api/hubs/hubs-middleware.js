@@ -21,7 +21,10 @@ const hubSchema = yup.object().shape({
   name: yup
     .string()
     .typeError('name must be a string')
-    .trim('')
+    .trim('only whitespace bad')
+    .required('name is required')
+    .min(3, 'name must be 3 chars long')
+    
 })
 
 function validateHub(req, res, next) {
