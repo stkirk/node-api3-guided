@@ -29,7 +29,9 @@ const hubSchema = yup.object().shape({
 
 async function validateHub(req, res, next) {
   try {
-    const validated = await hubSchema.validate()
+    const validated = await hubSchema.validate(
+      req.body
+    )
   } catch (err) {
     next({ status: 422, message: err.message })
   }
