@@ -16,7 +16,7 @@ router.get('/', (req, res, next) => {
     });
 });
 
-router.get('/:id', checkHubId, (req, res, next) => {
+router.get('/:id', checkHubId, (req, res) => {
   res.status(200).json(req.hub)
 });
 
