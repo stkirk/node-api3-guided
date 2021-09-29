@@ -1,3 +1,4 @@
+const yup = require('yup')
 const Hub = require('./hubs-model')
 
 async function checkHubId(req, res, next) {
@@ -16,16 +17,18 @@ async function checkHubId(req, res, next) {
   }
 }
 
-function validateHub(req, res, next) {
-  // if req.body legit next()
-  // if req.body sucks next({ body sucks })
-  const { name } = req.body
-  if (!name || typeof name !== 'string' || !name.trim()) {
-    next({ code: 400, message: 'name required' })
-  } else {
-    next()
-  }
-}
+
+
+// function validateHub(req, res, next) {
+//   // if req.body legit next()
+//   // if req.body sucks next({ body sucks })
+//   const { name } = req.body
+//   if (!name || typeof name !== 'string' || !name.trim()) {
+//     next({ code: 400, message: 'name required' })
+//   } else {
+//     next()
+//   }
+// }
 
 module.exports = {
   checkHubId,
