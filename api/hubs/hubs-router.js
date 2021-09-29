@@ -20,7 +20,7 @@ router.get('/:id', checkHubId, (req, res) => {
   res.status(200).json(req.hub)
 });
 
-router.post('/', validateHub, (req, res, next) => {
+router.post('/', validateHub, sanitizeHub, (req, res, next) => {
   Hubs.add(req.body)
   .then(hub => {
     res.status(201).json(hub);
