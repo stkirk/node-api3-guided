@@ -11,8 +11,8 @@ router.get('/', (req, res, next) => {
       res.status(200).json(hubs);
     })
     .catch(error => {
-      // unnecessary function wrapping
-      next(error);
+      // unnecessary function wrapping in this case
+      next(error); // you do it like this when try/catch
     });
 });
 
@@ -25,7 +25,7 @@ router.get('/:id', (req, res, next) => {
         res.status(404).json({ message: 'Hub not found' });
       }
     })
-    .catch(next);
+    .catch(next); // next will be called with an arg (triggering err-handling middleware)
 });
 
 router.post('/', (req, res) => {
