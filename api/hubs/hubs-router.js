@@ -28,21 +28,15 @@ router.get('/:id', (req, res, next) => {
     .catch(next); // next will be called with an arg (triggering err-handling middleware)
 });
 
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
   Hubs.add(req.body)
     .then(hub => {
       res.status(201).json(hub);
     })
-    .catch(error => {
-      // log error to server
-      console.log(error);
-      res.status(500).json({
-        message: 'Error adding the hub',
-      });
-    });
+    .catch(next);
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', (req, res, next) => {
   Hubs.remove(req.params.id)
     .then(count => {
       if (count > 0) {
@@ -51,16 +45,10 @@ router.delete('/:id', (req, res) => {
         res.status(404).json({ message: 'The hub could not be found' });
       }
     })
-    .catch(error => {
-      // log error to server
-      console.log(error);
-      res.status(500).json({
-        message: 'Error removing the hub',
-      });
-    });
+    .catch(next);
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', (req, res, next) => {
   Hubs.update(req.params.id, req.body)
     .then(hub => {
       if (hub) {
@@ -69,27 +57,15 @@ router.put('/:id', (req, res) => {
         res.status(404).json({ message: 'The hub could not be found' });
       }
     })
-    .catch(error => {
-      // log error to server
-      console.log(error);
-      res.status(500).json({
-        message: 'Error updating the hub',
-      });
-    });
+    .catch(next);
 });
 
-router.get('/:id/messages', (req, res) => {
+router.get('/:id/messages', (req, res, next) => {
   Hubs.findHubMessages(req.params.id)
     .then(messages => {
       res.status(200).json(messages);
     })
-    .catch(error => {
-      // log error to server
-      console.log(error);
-      res.status(500).json({
-        message: 'Error getting the messages for the hub',
-      });
-    });
+    .catch(next);
 });
 
 router.post('/:id/messages', (req, res) => {
