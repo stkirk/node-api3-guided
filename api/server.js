@@ -5,8 +5,8 @@ const hubsRouter = require('./hubs/hubs-router.js');
 const server = express();
 
 server.use(express.json());
-
-server.use('/api/hubs', hubsRouter);
+// server.use(logger); // globally, affects all routers and endpoints that come after
+server.use('/api/hubs', logger, hubsRouter);
 
 server.get('/', (req, res) => {
   res.send(`
@@ -17,7 +17,12 @@ server.get('/', (req, res) => {
 
 server.use('*', (req, res, next) => {
   // catch all 404 errors middleware
-  res.status(404).json({ message: `${req.method} ${req.baseUrl} not found!` })
+  res.status(404).json({ message: `${req.method} ${req.originalUrl} not found!` })
 });
 
 module.exports = server;
+
+function logger(req, res, next) {
+  console.log(`it is a ${req.method} request to ${req.path}`)
+  next() // next without args, sends req and res along the pipe
+}
