@@ -68,20 +68,15 @@ router.get('/:id/messages', (req, res, next) => {
     .catch(next);
 });
 
-router.post('/:id/messages', (req, res) => {
+router.post('/:id/messages', (req, res, next) => {
   const messageInfo = { ...req.body, hub_id: req.params.id };
 
   Messages.add(messageInfo)
     .then(message => {
       res.status(210).json(message);
     })
-    .catch(error => {
-      // log error to server
-      console.log(error);
-      res.status(500).json({
-        message: 'Error adding message to the hub',
-      });
-    });
+    .catch(next);
+    .catch(err => next(err))
 });
 
 module.exports = router;
