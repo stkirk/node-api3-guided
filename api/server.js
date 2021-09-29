@@ -29,6 +29,7 @@ function logger(req, res, next) { // middleware
   console.log(`it is a ${req.method} request to ${req.originalUrl}`)
   next() // next without args, sends req and res along the pipe
 }
+// eslint-disable-next-line
 function errorHandling(err, req, res, next) { // error handling
   // connect this with server.use at the end of the pipeline
   res.status(err.status || 500).json({
