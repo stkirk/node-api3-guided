@@ -5,7 +5,7 @@ const hubsRouter = require('./hubs/hubs-router.js');
 const server = express();
 
 server.use(express.json());
-server.use(helmet());
+server.use(helmet()); // global middleware, affects everything
 // server.use(logger); // globally, affects all routers and endpoints that come after
 server.use('/api/hubs', logger, hubsRouter);
 
