@@ -17,5 +17,5 @@ async function checkHubId (req, res, next) {
 }
 
 module.exports = {
-  
+  checkHubId,
 }
