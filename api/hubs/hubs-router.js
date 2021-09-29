@@ -76,7 +76,6 @@ router.post('/:id/messages', (req, res, next) => {
       res.status(210).json(message);
     })
     .catch(next);
-    .catch(err => next(err))
 });
 
 module.exports = router;
