@@ -27,11 +27,11 @@ const hubSchema = yup.object().shape({
     .max(10, 'name should be 10 chars tops')
 })
 
-function validateHub(req, res, next) {
+async function validateHub(req, res, next) {
   try {
-
+    const validated = await hubSchema.validate()
   } catch (err) {
-    next({ status: 422, })
+    next({ status: 422, message: err.message })
   }
 }
 
