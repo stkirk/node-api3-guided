@@ -25,6 +25,7 @@ const hubSchema = yup.object().shape({
     .required('name is required')
     .min(3, 'name must be 3 chars long')
     .max(10, 'name should be 10 chars tops')
+    .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field ")
 })
 
 async function validateHub(req, res, next) {
