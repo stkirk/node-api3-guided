@@ -22,7 +22,8 @@ server.use('*', (req, res, next) => {
 
 module.exports = server;
 
-function logger(req, res, next) {
+function logger(req, res, next) { // middleware
   console.log(`it is a ${req.method} request to ${req.originalUrl}`)
   next() // next without args, sends req and res along the pipe
 }
+function errorHandling(err)
