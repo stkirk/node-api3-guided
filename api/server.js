@@ -18,7 +18,9 @@ server.get('/', logger, (req, res) => {
 
 server.use('*', (req, res, next) => {
   // catch all 404 errors middleware
-  next({ message: `${req.method} ${req.originalUrl} not found!` })
+  // calling next with an arg, sends the arg as an err
+  // to the err handling middleware!
+  next({ status: 404, message: `${req.method} ${req.originalUrl} not found!` })
 });
 
 server.use(errorHandling) // will trap errors happening above
